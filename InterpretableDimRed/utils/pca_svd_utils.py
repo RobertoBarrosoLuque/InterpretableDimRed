@@ -4,6 +4,7 @@ Utility functions for dimensionality reduction using PCA and Truncated SVD. Take
 import numpy.linalg as la
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 plt.rcParams.update({'font.size': 22})
 
 def get_k_principal_components(X, k):
@@ -52,3 +53,28 @@ def plot_spectrum(X):
     ax.set_title('Spectrum of X')
     ax.set_xlabel('Singular value number')
     ax.set_ylabel('Singular value magnitude')
+
+
+def corr_pc_features(X, prin_comps):
+    """ 
+    Calculate correlation between original features X and principal components prin_comps.
+    :param X: feature matrix
+    :prin_comps: principal component vectors
+    :return results: pd.DataFrame with correlations between vectors and principal components.
+    """
+    col_names = ["PC" + str(i+1) for i in range(prin_comps.shape[0])]
+    results = pd.DataFrame(columns=col_names)
+
+    for i in X:
+        vec = X.loc[:, i].values
+        row = []
+        for pc in prin_comps:
+            row.append(np.corrcoef(pc,vec)[0][1])
+
+        results = results.append({col_names[j]:r for j,r in enumerate(row)}, 
+                                 ignore_index=True)
+    
+    results = results.rename(index={i:feature for i, feature in enumerate(X.columns.values)})
+
+    return results
+
