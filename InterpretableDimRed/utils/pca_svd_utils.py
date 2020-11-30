@@ -3,9 +3,11 @@ Utility functions for dimensionality reduction using PCA and Truncated SVD. Take
 """
 import numpy.linalg as la
 import numpy as np
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import pandas as pd
 plt.rcParams.update({'font.size': 22})
+
 
 def get_k_principal_components(X, k):
     """
@@ -77,4 +79,29 @@ def corr_pc_features(X, prin_comps):
     results = results.rename(index={i:feature for i, feature in enumerate(X.columns.values)})
 
     return results
+
+def train_test_split_w(X,Y, train_size=.80, random_state=22):
+    """
+    Wrapper function for sklearn's train/test split function.
+    """
+    X_train, X_test, y_train, y_test = train_test_split(X,Y, train_size=train_size, random_state=random_state)
+    return  X_train, X_test, y_train, y_test
+
+
+def least_squares_classifier(X_train, X_test, y_train):
+    """
+    Perform standard least squares to find the optimal weights and use weightts to predict
+    values using test set. Round to nearest -1, 1 to get labels.
+
+    :param X_train: feature matrix training set 
+    :param X_test: feature matrix test set
+    :param y_train: training set labels
+    :return y_p: predicted labels vector
+    """
+
+    # Get weights and make predictions
+    w_hat = la.inv(X_train.T @ X_train) @ X_train.T @ y_train
+    y_p = np.sign(X_test @ w_hat)
+
+    return y_p
 
