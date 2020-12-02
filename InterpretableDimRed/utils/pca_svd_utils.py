@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import pandas as pd
 plt.rcParams.update({'font.size': 22})
+import seaborn as sns
 
 
 def get_k_principal_components(X, k):
@@ -104,4 +105,26 @@ def least_squares_classifier(X_train, X_test, y_train):
     y_p = np.sign(X_test @ w_hat)
 
     return y_p
+
+def plot_feature_pca_corr(X, princip_comp, n):
+    """
+    Plot bargraphs to visualize the features with the largest correlations to the principal component vector.
+    """
+
+    results = corr_pc_features(X, princip_comp)
+
+    fig, axes = plt.subplots(figsize=(18, 10))
+
+    for i, cols in enumerate(results.columns):
+
+        results = corr_pc_features(X, princip_comp)
+
+        for i, cols in enumerate(results.columns):
+
+            sortd = results.loc[:,[cols]].sort_values(by=cols, ascending=False)
+            sortd.iloc[:n,:].plot(kind="bar", ax=axes)
+
+
+    fig.suptitle('Correlation between PCA vectors and original features (top {})'.format(n), size=15)
+    plt.show()
 
