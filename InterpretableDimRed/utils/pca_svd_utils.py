@@ -151,7 +151,7 @@ def normalize(dataset, features):
     for col in features: 
         col_mean = dataset[col].mean()
         col_std = dataset[col].std(ddof=0)
-        data_norm[col] = (train_df[col] - col_mean) / col_std
+        data_norm[col] = (dataset[col] - col_mean) / col_std
         
     return data_norm
 
