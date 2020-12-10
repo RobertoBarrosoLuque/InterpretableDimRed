@@ -128,3 +128,49 @@ def plot_feature_pca_corr(X, princip_comp, n):
     fig.suptitle('Correlation between PCA vectors and original features (top {})'.format(n), size=15)
     plt.show()
 
+
+def normalize(dataset, features): 
+    '''
+    Normalizes continuous variables in a training and testing dataset using
+    the mean and the standard deviation from solely the training set. Uses
+    the population estimates with zero degrees of freedom.
+    
+    Inputs: 
+        - train_df: (pandas dataframe) a dataframe containing the training set
+        - test_df: (pandas dataframe) a dataframe containing the testing set
+        - features: (lst) a list of column names that should be normalized
+        
+    Returns: 
+        - train_norm_df: (pandas dataframe) a dataframe containing the training
+                          set with the features normalized
+        - test_norm_df: (pandas dataframe) a dataframe containing the testing
+                         set with the features normalized
+    '''
+    data_norm = dataset.copy()
+    
+    for col in features: 
+        col_mean = dataset[col].mean()
+        col_std = dataset[col].std(ddof=0)
+        data_norm[col] = (train_df[col] - col_mean) / col_std
+        
+    return data_norm
+
+
+def dummy_cat_vars(df, features, separator="_"):
+    '''
+    One-hot encodes categorical variables in a data set
+
+    Inputs: 
+        - df: (pandas df) either a training or testing df
+        - features: (lst) the categorical features to encode as dummies
+        - separator: (str) the string to connect the feature name as a prefix
+                      on the feature value, defaults to "_"
+
+    Returns: 
+        - df: (pandas df) a modified dataframe with dummy variables included
+    '''
+    df = pd.get_dummies(df, columns=features, prefix_sep=separator)
+    df.columns = df.columns.str.lower()
+    df.columns = df.columns.str.replace(" ", "_")
+
+    return df
