@@ -174,3 +174,67 @@ def dummy_cat_vars(df, features, separator="_"):
     df.columns = df.columns.str.replace(" ", "_")
 
     return df
+
+
+def squared_error(y_hat, true_y):
+    '''
+    Calculates the squared error on a prediction problem
+    
+    Inputs: 
+        y_hat (1-D numpy array): a vector of predictions from the classifier
+        true_y (1-D numpy array): a vector of true labels from the classifier
+    
+    Returns:
+        error_rate (float): the number of errors divided by number of samples
+    '''
+    num_y = len(true_y)
+    error_rate = np.sum((y_hat - true_y)**2) / num_y
+    
+    return error_rate
+
+
+def c_and_g_algo(PC_vector):
+    '''
+    Runs the following algorithm as described by Chipman and Gu. Uses squared 
+    distance as a measure of closeness rather than angle closeness. 
+    
+    Takes the non-zero elements of the PC direction vector. 
+    For K = 1 through all the non zero elements,
+    Takes the k elements with the largest absolute value and sets them equal to
+        plus or minus one / square root of k
+    Sets all the other elements equal to zero
+    Finds the vector with k elements closest to the original PC direction vector
+    
+    Inputs: 
+        PC_vector (array) One principle component direction vector
+        
+    Returns: 
+        closest (array) One interpretable component direction vector
+        factor (float): the norm of the closest component direction vector
+    '''
+    closest = np.zeros((len(PC_vector)))
+    factor = 1
+    p = np.count_nonzero(PC_vector)
+    
+    signs = np.sign(PC_vector)   
+    in_order = np.sort(np.abs(PC_vector.copy()))
+    
+    for k in range(1, p):
+        magnitude = np.abs(PC_vector)
+        largest = in_order[-k:]
+        
+        for element in largest:
+            magnitude[magnitude == element] = 1
+        magnitude[magnitude != 1] = 0
+        
+        interp = magnitude * signs 
+        interp_factor = np.sqrt(k)
+        
+        distance = squared_error((inter / interp_factor), PC_vector)
+        prev_distance = squared_error(closest, PC_vector)
+        
+        if distance < prev_distance:
+            closest = interp
+            factor = interp_factor
+            
+    return closest, factor
