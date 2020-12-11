@@ -106,6 +106,7 @@ def least_squares_classifier(X_train, X_test, y_train):
 
     return y_p
 
+
 def plot_feature_pca_corr(X, princip_comp, n):
     """
     Plot bargraphs to visualize the features with the largest correlations to the principal component vector.
@@ -185,12 +186,11 @@ def squared_error(y_hat, true_y):
         true_y (1-D numpy array): a vector of true labels from the classifier
     
     Returns:
-        error_rate (float): the number of errors divided by number of samples
+        error_rate (float): the sum of squared errors
     '''
-    num_y = len(true_y)
-    error_rate = np.sum((y_hat - true_y)**2) / num_y
+    error = np.sum((y_hat - true_y)**2)
     
-    return error_rate
+    return error
 
 
 def c_and_g_algo(PC_vector):
@@ -213,7 +213,6 @@ def c_and_g_algo(PC_vector):
         factor (float): the norm of the closest component direction vector
     '''
     closest = np.zeros((len(PC_vector)))
-    factor = 1
     p = np.count_nonzero(PC_vector)
     
     signs = np.sign(PC_vector)   
@@ -229,12 +228,14 @@ def c_and_g_algo(PC_vector):
         
         interp = magnitude * signs 
         interp_factor = np.sqrt(k)
+        interp_vec = interp / interp_factor
         
-        distance = squared_error((inter / interp_factor), PC_vector)
+        distance = squared_error(interp_vec, PC_vector)
         prev_distance = squared_error(closest, PC_vector)
         
         if distance < prev_distance:
-            closest = interp
-            factor = interp_factor
+            closest = interp_vec
+
             
-    return closest, factor
+    return closest
+
