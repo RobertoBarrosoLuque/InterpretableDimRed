@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.11.1)  11 DEC 2020 16:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.11.1)  11 DEC 2020 16:32
 entering extended mode
 **./neurips_2020.tex
 (neurips_2020.tex
@@ -477,36 +477,37 @@ Package microtype Info: Loading generic protrusion settings for font family
 <spectrumHD.png, id=67, 743.02594pt x 396.35577pt>
 File: spectrumHD.png Graphic file (type png)
 <use spectrumHD.png>
-Package pdftex.def Info: spectrumHD.png  used on input line 103.
+Package pdftex.def Info: spectrumHD.png  used on input line 108.
 (pdftex.def)             Requested size: 397.48499pt x 212.03311pt.
 
-Overfull \hbox (48.11089pt too wide) in paragraph at lines 133--150
+Overfull \hbox (48.11089pt too wide) in paragraph at lines 138--155
  [][] 
  []
 
 
-Overfull \hbox (73.0612pt too wide) in paragraph at lines 155--170
+Overfull \hbox (73.0612pt too wide) in paragraph at lines 160--175
  [][] 
  []
 
 
-Overfull \hbox (63.75026pt too wide) in paragraph at lines 177--197
+Overfull \hbox (63.75026pt too wide) in paragraph at lines 182--202
  [][] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1248) has occurred while \output is active []
 
- [4 <./spectrumHD.png>] [5] [6] (neurips_2020.aux)
+ [4]
+[5 <./spectrumHD.png>] [6] (neurips_2020.aux)
 Package rerunfilecheck Info: File `neurips_2020.out' has not changed.
 (rerunfilecheck)             Checksum: 33FF730C2DCD168AC6157360A8AC39AE;741.
  ) 
 Here is how much of TeX's memory you used:
- 8223 strings out of 480224
- 132363 string characters out of 2880103
- 474668 words of memory out of 3000000
+ 8232 strings out of 480224
+ 132435 string characters out of 2880103
+ 476171 words of memory out of 3000000
  24489 multiletter control sequences out of 15000+200000
- 562349 words of font info for 130 fonts, out of 3000000 for 9000
+ 562739 words of font info for 136 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,8n,77p,1543b,369s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/robal/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <C
@@ -515,7 +516,7 @@ pk><C:/Users/robal/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.p
 fb><C:/Users/robal/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.p
 fb><C:/Users/robal/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.
 pfb>
-Output written on neurips_2020.pdf (6 pages, 166280 bytes).
+Output written on neurips_2020.pdf (6 pages, 166920 bytes).
 PDF statistics:
  127 PDF objects out of 1000 (max. 8388607)
  24 named destinations out of 1000 (max. 500000)
