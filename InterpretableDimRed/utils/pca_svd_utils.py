@@ -206,7 +206,7 @@ def c_and_g_algo(PC_vector):
     Finds the vector with k elements closest to the original PC direction vector
     
     Inputs: 
-        PC_vector (array) One principle component direction vector
+        PC_vector (array): One principle component direction vector
         
     Returns: 
         closest (array) One interpretable component direction vector
@@ -236,6 +236,5 @@ def c_and_g_algo(PC_vector):
         if distance < prev_distance:
             closest = interp_vec
 
-            
     return closest
 
