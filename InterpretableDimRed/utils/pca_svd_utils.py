@@ -193,6 +193,25 @@ def squared_error(y_hat, true_y):
     return error
 
 
+def classify_error(y_hat, true_y):
+    '''
+    Calculates the error on a binary classification problem
+    
+    Inputs: 
+        y_hat (1-D numpy array): a vector of predictions from the classifier
+        true_y (1-D numpy array): a vector of true labels from the classifier
+    
+    Returns:
+        error_rate (float): the number of errors divided by number of samples
+    '''
+    num_y = len(true_y)
+    
+    predicted_labels = np.sign(y_hat)
+    error_rate = np.sum(predicted_labels != true_y) / num_y
+    
+    return error_rate
+
+
 def c_and_g_algo(PC_vector):
     '''
     Runs the following algorithm as described by Chipman and Gu. Uses squared 
